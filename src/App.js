@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
-function App(props) {
-  // state的默认值基于props
-  // 函数只在第一次渲染时被调用 函数的返回值就是默认值
-  const [count, setCount] = useState(() => {
-    console.log('testing');
-    return props.defaultCount || 0;
-  });
+const Counter = ({ count }) => <h1>{count}</h1>;
 
-  const handleClick = () => {
-    setCount(c => c + 1);
-  };
+function App() {
+  const [count, setCount] = useState(0);
+  const double = useMemo(() => count * 2, [count === 3]);
+
+  const half = useMemo(() => double / 4, [double]);
 
   return (
     <div className="App">
-      <button onClick={handleClick}>Count {count}</button>
+      <button onClick={() => setCount(c => c + 1)}>Click:{count}, double:{double}, half:{half} </button>
+      <Counter count={count} />
     </div>
   );
 }
