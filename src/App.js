@@ -4,8 +4,10 @@ const Counter = ({ count }) => <h1>{count}</h1>;
 
 function App() {
   const [count, setCount] = useState(0);
-  const double = useMemo(() => count * 2, [count === 3]);
-
+  const double = useMemo(() => {
+    console.log(123);
+    return count * 2;
+  }, [count === 3]);
   const half = useMemo(() => double / 4, [double]);
 
   return (
