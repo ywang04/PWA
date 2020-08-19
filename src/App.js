@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [size, setSize] = useState({
+    width: document.documentElement.clientWidth,
+    height: document.documentElement.clientHeight,
+  });
+  const handleClick = () => setCount(c => c + 1);
+
+  //不同useEffect 关注点分离
+  useEffect(() => {
+    document.title = count;
+  });
+
+  useEffect(() => {
+    console.log('count');
+  }, [count])
+
+  useEffect(() => {
+    console.log('binding');
+    window.addEventListener('resize', function () {
+      setSize({
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight,
+      });
+    });
+    return () => {
+      console.log('destroy');
+      window.removeEventListener('resize', function () {
+        setSize({
+          width: document.documentElement.clientWidth,
+          height: document.documentElement.clientHeight,
+        });
+      });
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button onClick={handleClick}>
+      Click {count} size: {size.width} * {size.height}
+    </button>
   );
 }
 
