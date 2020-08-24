@@ -4,6 +4,7 @@ import Control from './Control';
 import './App.css';
 
 function TodoList() {
+  //immutable 不能直接改 但是可以修改复本
   const [todos, setTodos] = useState([]);
   const addTodo = useCallback(todo => {
     setTodos(preState => [...preState, todo]);
