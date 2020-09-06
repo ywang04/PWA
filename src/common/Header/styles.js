@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 2;
+`;
+
+export const HeaderContainer = styled.div`
   height: 44px;
   line-height: 44px;
   min-width: 240px;

@@ -1,17 +1,19 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { HeaderWrapper, BackContainer, HeaderTitle, BackIcon } from './styles';
+import * as Styles from './styles';
 
 const Header = memo(({ title, onBack }) => {
   return (
-    <HeaderWrapper>
-      <BackContainer onClick={onBack}>
-        <BackIcon>
-          <polyline points={'25,13 16,21 25,29'} />
-        </BackIcon>
-      </BackContainer>
-      <HeaderTitle>{title}</HeaderTitle>
-    </HeaderWrapper>
+    <Styles.HeaderWrapper>
+      <Styles.HeaderContainer>
+        <Styles.BackContainer onClick={onBack}>
+          <Styles.BackIcon>
+            <polyline points={'25,13 16,21 25,29'} />
+          </Styles.BackIcon>
+        </Styles.BackContainer>
+        <Styles.HeaderTitle>{title}</Styles.HeaderTitle>
+      </Styles.HeaderContainer>
+    </Styles.HeaderWrapper>
   );
 });
 
