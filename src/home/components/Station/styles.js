@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const StationWrapper = styled.div`
   display: flex;
+  .destination {
+    text-align: right;
+  }
 `;
 
 export const StationContainer = styled.div`

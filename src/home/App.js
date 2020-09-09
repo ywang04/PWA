@@ -1,36 +1,26 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Header from '../common/Header';
 import Station from './components/Station';
 import DepartDate from './components/DepartDate';
-import HightSpeed from './components/HighSpeed';
+import HighSpeed from './components/HighSpeed';
 import SubmitButton from './components/SubmitButton';
-import { connect } from 'react-redux';
 import './App.css';
 
-const App = ({ origin, destination }) => {
+const App = () => {
+  const [count, setCount] = useState(0);
   const handleBack = useCallback(() => window.history.back(), []);
 
   return (
     <>
       <Header title="火车票" onBack={handleBack} />
-      <Station origin={origin} destination={destination} />
+      <Station />
       <DepartDate />
-      <HightSpeed />
+      <HighSpeed />
       <SubmitButton />
+      <button onClick={() => setCount(c => c + 1)}>{count}</button>
     </>
   );
 };
 
-const mapStateToProps = ({ station }) => {
-  return {
-    origin: station.origin,
-    destination: station.destination,
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  function mapDispatchToProps(dispatch) {
-    return { dispatch };
-  }
-)(App);
+export default App;
