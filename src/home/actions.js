@@ -1,34 +1,25 @@
-export const SET_ORIGIN = 'SET_ORIGIN';
-export const SET_DESTINATION = 'SET_DESTINATION';
-export const SET_CITY_DATA = 'SET_CITY_DATA';
-export const SET_IS_LOADING_CITY = 'SET_IS_LOADING_CITY';
-export const SET_IS_HIGH_SPEED = 'SET_IS_HIGH_SPEED';
-export const SET_SHOW_CITY_LIST = 'SET_SHOW_CITY_LIST';
-export const SET_SHOW_DATE_SELECTION = 'SET_SHOW_DATE_SELECTION';
+import * as Constants from './constants';
 
 export const setOrigin = origin => ({
-  type: 'SET_ORIGIN',
+  type: Constants.SET_ORIGIN,
   origin,
 });
 
 export const setDestination = destination => ({
-  type: 'SET_DESTINATION',
+  type: Constants.SET_DESTINATION,
   destination,
 });
 
-export const setCityData = cities => ({
-  type: 'SET_IS_LOADING_CITY',
-  cities,
-});
+export const updateIsLoadingCityData = isLoadingCityData => {
+  return {
+    type: Constants.SET_IS_LOADING_CITY_DATA,
+    isLoadingCityData,
+  };
+};
 
-export const setIsLoadingCity = status => ({
-  type: 'SET_IS_LOADING_CITY',
-  status,
-});
-
-export const toggleHighSpeed = status => ({
-  type: 'SET_IS_HIGH_SPEED',
-  status,
+export const setCityData = cityData => ({
+  type: Constants.SET_CITY_DATA,
+  cityData,
 });
 
 export const swapStations = (origin, destination) => dispatch => {
@@ -36,6 +27,28 @@ export const swapStations = (origin, destination) => dispatch => {
   dispatch(setDestination(origin));
 };
 
-export const showCityList = () => dispatch => {
+export const updateCitySelectorVisible = isCitySelectorVisible => ({
+  type: Constants.SET_IS_CITY_SELECTOR_VISIBLE,
+  isCitySelectorVisible: !isCitySelectorVisible,
+});
 
+// export const toggleHighSpeed = status => ({
+//   type: 'SET_IS_HIGH_SPEED',
+//   status,
+// });
+
+export const fetchCityData = () => dispatch => {
+  dispatch(updateIsLoadingCityData(true));
+  fetch('/rest/cities?_' + Date.now())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.json();
+    })
+    .then(cityData => dispatch(setCityData(cityData)))
+    .catch(err => console.log(err))
+    .finally(() => {
+      dispatch(updateIsLoadingCityData(false));
+    });
 };

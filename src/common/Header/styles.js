@@ -9,6 +9,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const HeaderContainer = styled.div`
+  position: relative;
   height: 44px;
   line-height: 44px;
   min-width: 240px;
@@ -16,15 +17,16 @@ export const HeaderContainer = styled.div`
   color: #fff;
   font-size: 18px;
   text-align: center;
-  position: relative;
   padding: 0 15px;
 `;
 
 export const BackContainer = styled.div`
   position: absolute;
+  top: 0;
   left: 0;
   width: 42px;
   height: 42px;
+  cursor: pointer;
 `;
 
 export const BackIcon = styled.svg`

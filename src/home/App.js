@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from 'react';
+import { connect } from 'react-redux';
 import Header from '../common/Header';
+import CitySelector from '../common/CitySelector';
 import Station from './components/Station';
 import DepartDate from './components/DepartDate';
 import HighSpeed from './components/HighSpeed';
@@ -14,6 +16,7 @@ const App = () => {
     <>
       <Header title="火车票" onBack={handleBack} />
       <Station />
+      <CitySelector />
       <DepartDate />
       <HighSpeed />
       <SubmitButton />
@@ -22,5 +25,8 @@ const App = () => {
   );
 };
 
+const mapStateToProps = ({ home }) => ({
+  isCitySelectorVisible: home.isCitySelectorVisible,
+});
 
-export default App;
+export default connect(mapStateToProps)(App);
