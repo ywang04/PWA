@@ -15,7 +15,7 @@ const CityList = ({ cityData }) => {
 };
 
 CityList.propTypes = {
-  cityData: PropTypes.object.isRequired,
+  cityData: PropTypes.object,
 };
 
 export default CityList;

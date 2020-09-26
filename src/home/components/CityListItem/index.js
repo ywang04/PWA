@@ -18,7 +18,7 @@ const CityListItem = ({ cities, title }) => {
 };
 
 CityListItem.propTypes = {
-  cities: PropTypes.array.isRequired,
+  cities: PropTypes.array,
   title: PropTypes.string.isRequired,
 };
 
