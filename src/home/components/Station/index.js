@@ -16,8 +16,7 @@ const Station = memo(
     const handleClickStation = () =>
       updateCitySelectorVisible(isCitySelectorVisible);
 
-    const handleSwapStation = () =>
-      swapStations(origin, destination);
+    const handleSwapStation = () => swapStations(origin, destination);
 
     return (
       <Styles.StationWrapper>

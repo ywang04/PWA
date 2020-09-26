@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 import Header from '../common/Header';
-import CitySelector from '../common/CitySelector';
+import CitySelector from './components/CitySelector';
 import Station from './components/Station';
 import DepartDate from './components/DepartDate';
 import HighSpeed from './components/HighSpeed';
