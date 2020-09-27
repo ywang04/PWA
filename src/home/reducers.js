@@ -5,6 +5,7 @@ const initialState = {
   origin: '北京',
   destination: '上海',
   isCitySelectorVisible: false,
+  hasError: false,
   isLoadingCityData: false,
   cityData: null,
   showDateSelection: false,
@@ -35,13 +36,23 @@ const homeReducer = (reducerState, action) => {
     case Constants.SET_IS_LOADING_CITY_DATA:
       return {
         ...state,
-        isLoadingCityData: action.isLoadingCityData,
+        isLoadingCityData: true,
+        hasError: false,
       };
 
     case Constants.SET_CITY_DATA:
       return {
         ...state,
         cityData: action.cityData,
+        isLoadingCityData: false,
+        hasError: false,
+      };
+
+    case Constants.SET_RECEIVE_CITY_DATA_FAILED:
+      return {
+        ...state,
+        isLoadingCityData: false,
+        hasError: true,
       };
 
     default:

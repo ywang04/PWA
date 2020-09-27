@@ -7,8 +7,8 @@ const CityList = ({ cityData }) => {
   const cityList = cityData?.cityList?.map(cityItem => (
     <CityListItem
       key={cityItem.title}
-      cities={cityItem.citys}
       title={cityItem.title}
+      cities={cityItem.citys}
     />
   ));
   return <SC.CityListWrapper>{cityList}</SC.CityListWrapper>;
