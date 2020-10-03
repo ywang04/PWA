@@ -15,6 +15,11 @@ export const swapStations = (origin, destination) => dispatch => {
   dispatch(setDestination(origin));
 };
 
+export const updateSideSelection = isLeftSelected => ({
+  type: Constants.SET_SIDE_SELECTION,
+  isLeftSelected,
+});
+
 export const updateCitySelectorVisible = isCitySelectorVisible => ({
   type: Constants.SET_IS_CITY_SELECTOR_VISIBLE,
   isCitySelectorVisible: !isCitySelectorVisible,
@@ -24,7 +29,6 @@ export const requestCityData = () => ({
   type: Constants.SET_IS_LOADING_CITY_DATA,
 });
 
-
 export const requestCityDataFailed = () => ({
   type: Constants.SET_RECEIVE_CITY_DATA_FAILED,
 });
@@ -33,7 +37,6 @@ export const setCityData = cityData => ({
   type: Constants.SET_CITY_DATA,
   cityData,
 });
-
 
 // export const toggleHighSpeed = status => ({
 //   type: 'SET_IS_HIGH_SPEED',

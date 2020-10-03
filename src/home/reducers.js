@@ -10,6 +10,7 @@ const initialState = {
   cityData: null,
   showDateSelection: false,
   isHighSpeed: false,
+  isLeftSelected: false,
 };
 
 const homeReducer = (reducerState, action) => {
@@ -31,6 +32,12 @@ const homeReducer = (reducerState, action) => {
       return {
         ...state,
         isCitySelectorVisible: action.isCitySelectorVisible,
+      };
+
+    case Constants.SET_SIDE_SELECTION:
+      return {
+        ...state,
+        isLeftSelected: action.isLeftSelected,
       };
 
     case Constants.SET_IS_LOADING_CITY_DATA:

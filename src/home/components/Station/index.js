@@ -1,7 +1,11 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { swapStations, updateCitySelectorVisible } from '../../actions';
+import {
+  swapStations,
+  updateCitySelectorVisible,
+  updateSideSelection,
+} from '../../actions';
 import SwapImg from '../../images/swap.svg';
 import * as Styles from './styles';
 
@@ -11,11 +15,13 @@ const Station = memo(
     destination,
     swapStations,
     updateCitySelectorVisible,
+    updateSideSelection,
     isCitySelectorVisible,
   }) => {
-    const handleClickStation = () =>
+    const handleClickStation = isLeftSelected => () => {
+      updateSideSelection(isLeftSelected);
       updateCitySelectorVisible(isCitySelectorVisible);
-
+    };
     const handleSwapStation = () => swapStations(origin, destination);
 
     return (
@@ -26,7 +32,7 @@ const Station = memo(
             value={origin}
             name="origin"
             readOnly
-            onClick={handleClickStation}
+            onClick={handleClickStation(true)}
           />
         </Styles.StationContainer>
         <Styles.SwapWrapper onClick={handleSwapStation}>
@@ -39,7 +45,7 @@ const Station = memo(
             name="destination"
             className="destination"
             readOnly
-            onClick={handleClickStation}
+            onClick={handleClickStation(false)}
           />
         </Styles.StationContainer>
       </Styles.StationWrapper>
@@ -51,17 +57,22 @@ Station.propTypes = {
   origin: PropTypes.string.isRequired,
   destination: PropTypes.string.isRequired,
   isCitySelectorVisible: PropTypes.bool,
+  updateSideSelection: PropTypes.func,
 };
 
-const mapStateToProps = ({ home }) => ({
-  origin: home.origin,
-  destination: home.destination,
-  isCitySelectorVisible: home.isCitySelectorVisible,
-});
+const mapStateToProps = ({ home }) => {
+  const { origin, destination, isCitySelectorVisible } = home;
+  return {
+    origin,
+    destination,
+    isCitySelectorVisible,
+  };
+};
 
 const actionCreators = {
   swapStations,
   updateCitySelectorVisible,
+  updateSideSelection,
 };
 
 export default connect(mapStateToProps, actionCreators)(Station);
