@@ -38,7 +38,7 @@ export const setCityData = cityData => ({
   cityData,
 });
 
-export const updateSelectedStation = (
+export const setSelectedStation = (
   station,
   isOriginSelected,
   isCitySelectorVisible

@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateSelectedStation } from '../../actions';
+import { setSelectedStation } from '../../actions';
 import * as SC from './styles';
 
 const CityListItem = ({
   cities,
   title,
   isOriginSelected,
-  updateSelectedStation,
   isCitySelectorVisible,
+  setSelectedStation,
 }) => {
   const cityListItem = cities?.map(city => (
     <SC.Item
       key={city.name}
-      onClick={() => updateSelectedStation(city.name, isOriginSelected, isCitySelectorVisible)}
+      onClick={() => setSelectedStation(city.name, isOriginSelected, isCitySelectorVisible)}
     >
       {city.name}
     </SC.Item>
@@ -34,6 +34,7 @@ CityListItem.propTypes = {
   title: PropTypes.string,
   isOriginSelected: PropTypes.bool,
   isCitySelectorVisible: PropTypes.bool,
+  setSelectedStation: PropTypes.func,
 };
 
 const mapStateToProps = ({ home }) => ({
@@ -42,7 +43,7 @@ const mapStateToProps = ({ home }) => ({
 });
 
 const actionCreators = {
-  updateSelectedStation,
+  setSelectedStation,
 };
 
 export default connect(mapStateToProps, actionCreators)(CityListItem);

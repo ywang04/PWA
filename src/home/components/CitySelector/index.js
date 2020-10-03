@@ -9,10 +9,10 @@ import * as Styles from './styles';
 const CitySelector = ({
   isCitySelectorVisible,
   isLoadingCityData,
+  hasError,
   cityData,
   updateCitySelectorVisible,
   fetchCityData,
-  hasError,
 }) => {
   useEffect(() => {
     if (!isCitySelectorVisible || cityData) {
