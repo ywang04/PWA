@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import CityListItem from '../CityListItem';
 import * as SC from './styles';
 
-const CityList = ({ cityData }) => {
+const CityList = memo(({ cityData }) => {
   const cityList = cityData?.cityList?.map(cityItem => (
     <CityListItem
       key={cityItem.title}
@@ -12,7 +12,7 @@ const CityList = ({ cityData }) => {
     />
   ));
   return <SC.CityListWrapper>{cityList}</SC.CityListWrapper>;
-};
+});
 
 CityList.propTypes = {
   cityData: PropTypes.object,

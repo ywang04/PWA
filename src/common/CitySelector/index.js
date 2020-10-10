@@ -9,7 +9,6 @@ import * as Styles from './styles';
 const CitySelector = ({
   isCitySelectorVisible,
   isLoadingCityData,
-  cityData,
   updateCitySelectorVisible,
   fetchCityData,
 }) => {
@@ -18,18 +17,19 @@ const CitySelector = ({
   const handleCleanSearch = () => {
     setSearchInput('');
   };
-  const handleBack = isCitySelectorVisible => () =>
+  const handleBack = () =>
     updateCitySelectorVisible(isCitySelectorVisible);
 
   useEffect(() => {
-    (isCitySelectorVisible || isLoadingCityData) && fetchCityData(isLoadingCityData);
+    (isCitySelectorVisible || isLoadingCityData) &&
+      fetchCityData(isLoadingCityData);
   }, [isCitySelectorVisible, fetchCityData, isLoadingCityData]);
 
   return (
     isCitySelectorVisible && (
       <Styles.CitySelector>
         <Styles.CitySearchContainer>
-          <BackContainer onClick={handleBack(isCitySelectorVisible)}>
+          <BackContainer onClick={handleBack}>
             <BackIcon>
               <polyline points={'25,13 16,21 25,29'} />
             </BackIcon>
@@ -56,16 +56,15 @@ const CitySelector = ({
 
 CitySelector.propTypes = {
   isCitySelectorVisible: PropTypes.bool.isRequired,
+  isLoadingCityData: PropTypes.bool,
   updateCitySelectorVisible: PropTypes.func,
+  fetchCityData: PropTypes.func,
 };
 
-const mapStateToProps = ({ home }) => {
-  return {
-    isCitySelectorVisible: home.isCitySelectorVisible,
-    isLoadingCityData: home.isLoadingCityData,
-    cityData: home.cityData,
-  };
-};
+const mapStateToProps = ({ home }) => ({
+  isCitySelectorVisible: home.isCitySelectorVisible,
+  isLoadingCityData: home.isLoadingCityData,
+});
 
 const actionCreators = {
   updateCitySelectorVisible,
